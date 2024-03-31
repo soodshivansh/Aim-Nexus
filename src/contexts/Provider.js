@@ -1,6 +1,6 @@
 "use client"
 import React, {createContext, useContext} from 'react'
-import { ID, Client, Account, Databases, Storage } from 'appwrite'
+import { ID, Client, Account, Databases, Storage, Query } from 'appwrite'
 import { useRouter } from 'next/navigation'
 
 const AppContext = createContext(null)
@@ -69,6 +69,7 @@ const Provider = ({children}) => {
             const user = await account.get()
             return user
         }catch(err){
+            router.push("/")
             return null
         }
     }
@@ -145,6 +146,52 @@ const Provider = ({children}) => {
         }
     }
 
+    // fetch designs 
+    const fetchdesignsfromcoll = async(userid = "") => {
+        try{
+            if(userid){
+                const response = await database.listDocuments(
+                    process.env.NEXT_PUBLIC_DATABASE_ID,
+                    process.env.NEXT_PUBLIC_DESIGN_COLLECTION_ID,
+                    [Query.equal("userid",[userid])]
+                )
+            }else{
+                const response = await database.listDocuments(
+                    process.env.NEXT_PUBLIC_DATABASE_ID,
+                    process.env.NEXT_PUBLIC_DESIGN_COLLECTION_ID,
+                )
+                return response
+            }
+        }catch(err){
+            alert(err)
+        }
+    }
+
+    const fetchusers = async(userIds = []) => {
+        try{
+            if(userIds){
+                const querys = Query.equal("userid",userIds)
+                const records = await database.listDocuments(
+                    process.env.NEXT_PUBLIC_DATABASE_ID,
+                    process.env.NEXT_PUBLIC_USER_COLLECTION_ID
+                ) 
+                return records
+            }else{
+                const records = await database.listDocuments(
+                    process.env.NEXT_PUBLIC_DATABASE_ID,
+                    process.env.NEXT_PUBLIC_USER_COLLECTION_ID,
+                )
+                return records
+            }
+        }catch(err){
+            alert(err)
+        }
+    }
+
+    const logout = async() => {
+        await account.deleteSession("current")
+    }
+
     const exposedvalues = {
         signup,
         login,
@@ -154,6 +201,9 @@ const Provider = ({children}) => {
         updateuser,
         getpicpreview,
         createdesign,
+        fetchdesignsfromcoll,
+        fetchusers,
+        logout,
     }
 
   return (

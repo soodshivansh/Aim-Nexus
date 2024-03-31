@@ -5,7 +5,6 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
   } from "@/components/ui/dialog"  
 import {Pencil} from "lucide-react"
 import { useAppContext } from '@/contexts/Provider'
@@ -41,9 +40,7 @@ const ProfileDialog = ({profileimage, setprofileimage, UserDetails, userId, getC
 
     const handlefilechange = (e) => {
         const file = e.target.files[0];
-    
-        console.log(file)
-    
+        
         const fileReader = new FileReader();
     
         fileReader.onloadend = () => {

@@ -18,13 +18,15 @@ const UsersPage = () => {
 
     const getcurruser = async() => {
         let user = await getloggedinuser()
-        let userid = user.$id
-        setUserId(userid)
-        // get user info from appwrite
-        let userdetails = await getuserdetails(userid)
-        setUserDetails({...userdetails})
-        if(userdetails?.profilepic){
-            handleimagepreview(userdetails?.profilepic)
+        let userid = user?.$id
+        if(userid){
+            setUserId(userid)
+            // get user info from appwrite
+            let userdetails = await getuserdetails(userid)
+            setUserDetails({...userdetails})
+            if(userdetails?.profilepic){
+                handleimagepreview(userdetails?.profilepic)
+            }
         }
     }
 
