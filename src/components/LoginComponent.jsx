@@ -67,7 +67,7 @@ export default function LoginForm() {
     </div>
 
       <button className='bg-[#03A9F4] rounded-full p-2 text-white font-semibold' type="submit">Submit</button>
-        <span className='flex justify-center text-sm text-grey-400'>Don't have an account?<Link href = "/signup"><strong>&nbsp;Create account here</strong></Link></span>
+        <span className='flex justify-center text-sm text-grey-400'>Dont have an account?<Link href = "/signup"><strong>&nbsp;Create account here</strong></Link></span>
     </form>
   );
 };
