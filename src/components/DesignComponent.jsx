@@ -8,8 +8,8 @@ const DesignComponent = ({finalrecords, userrecords}) => {
     <div className='flex flex-col justify-center grow'>
       {finalrecords.length === 0 ? <span>No designs yet</span> : 
       <div className='w-[400px] grid grid-col-3 gap-10'>
-        {finalrecords.map((item) => (
-        <div className='flex flex-col space-y-3 w-full h-[200px]'>
+        {finalrecords.map((item,index) => (
+        <div key={index} className='flex flex-col space-y-3 w-full h-[200px]'>
           <DesignImageComponent imageId = {item["designpic"]} />
           <div className='flex justify-between'>
             <div>
