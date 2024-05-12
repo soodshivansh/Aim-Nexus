@@ -13,7 +13,6 @@ const DesignComponent = ({finalrecords, userrecords}) => {
           <DesignImageComponent imageId = {item["designpic"]} />
           <div className='flex justify-between'>
             <div>
-              {/* <img src='' /> */}
               <span>{userrecords[item?.userid]?.["name"]}</span>
             </div>
             <div className='flex space-x-1'>
